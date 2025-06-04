@@ -1,7 +1,7 @@
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
 pkgname=xwayland-satellite
-pkgver=0.5.1
+pkgver=0.6
 pkgrel=1
 pkgdesc="Xwayland outside your Wayland"
 arch=(x86_64)
@@ -19,8 +19,8 @@ makedepends=(
   rust
 )
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha512sums=('31369add44d81607987a713968b80e8c237bbd545e734d1b856fe74a847623a714259c7229997bbf7a71147a3ca6a145f80ff17d7e551a33b5afe9cc4d422fb3')
-b2sums=('1a5239b30edf5d66761c8a5654180c53a3761a385815116765419f9b4c2c28481fd0d4ec58405603434dac270a88fbd782a6359e930587acc77f5ba1abd6b5f3')
+sha512sums=('8b03cc50b883fa9417f92430be72abdc57bd9ed3b973e51fe8b0ad01485470c69f8284dda325447ae670624ef32f1167aff5b5c57681990d0e55c6178ac226c6')
+b2sums=('905471a512c49e0c07154d5ccaecf5f37f4e282e2bbfbb3bbde79f198151ac9c7fdb888b8b8a502a8c9bc49cbebba465a5f9e12b97af054b0d0aef30d3a44885')
 
 prepare() {
   cd $pkgname-$pkgver
@@ -33,14 +33,14 @@ build() {
   cd $pkgname-$pkgver
   export RUSTUP_TOOLCHAIN=stable
   export CARGO_TARGET_DIR=target
-  cargo build --frozen --release --all-features
+  cargo build --frozen --release --features systemd
 }
 
 check() {
   cd $pkgname-$pkgver
   export XDG_RUNTIME_DIR="$(mktemp -d)"
   export RUSTUP_TOOLCHAIN=stable
-  cargo test --frozen --all-features
+  cargo test --frozen
 }
 
 package() {
