@@ -1,7 +1,7 @@
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
 pkgname=xwayland-satellite
-pkgver=0.7
+pkgver=0.8
 pkgrel=1
 pkgdesc="Xwayland outside your Wayland"
 arch=(x86_64)
@@ -19,8 +19,8 @@ makedepends=(
   rust
 )
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha512sums=('7f090573faf9f6675981bbc5474e2761ef1c1b758aa9182cd46301cf88be689b631d21156ac6508a2f90edb866fc65022d4019b4cf6121f189cdadaf70a524ab')
-b2sums=('5baedd8b0be628bb9f7ed9c58c3c8b1ca67ff418d42723075aeb9352a542327d62b20e42dd031b6183d9c9c6c0d3819e3633dda889c94d7772c5d039b720d56f')
+sha512sums=('f53121f7367e1b7326b8910e58ed8d3086fa1a3d18e9cf4f6d52041ca1c1e621e44ecf6d357edefdb93f7df56c067e999f8da52e9b39ebf2b94965e17af77b53')
+b2sums=('d4a920127f8a27a830bcdc768a738cd6d1fb5fadabded7416b53b237ddc3d44437b46675664e16c671cd21ec9222317273069b6474ccb1e9e50b277ac6432672')
 
 prepare() {
   cd $pkgname-$pkgver
