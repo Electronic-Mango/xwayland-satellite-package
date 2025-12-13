@@ -25,21 +25,17 @@ b2sums=('d4a920127f8a27a830bcdc768a738cd6d1fb5fadabded7416b53b237ddc3d44437b4667
 prepare() {
   cd $pkgname-$pkgver
   sed 's|/usr/local|/usr|' -i resources/$pkgname.service
-  export RUSTUP_TOOLCHAIN=stable
   cargo fetch --locked --target "$(rustc --print host-tuple)"
 }
 
 build() {
   cd $pkgname-$pkgver
-  export RUSTUP_TOOLCHAIN=stable
-  export CARGO_TARGET_DIR=target
   cargo build --frozen --release --features systemd
 }
 
 check() {
   cd $pkgname-$pkgver
   export XDG_RUNTIME_DIR="$(mktemp -d)"
-  export RUSTUP_TOOLCHAIN=stable
   cargo test --frozen
 }
 
