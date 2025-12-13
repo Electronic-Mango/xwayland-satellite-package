@@ -26,7 +26,7 @@ prepare() {
   cd $pkgname-$pkgver
   sed 's|/usr/local|/usr|' -i resources/$pkgname.service
   export RUSTUP_TOOLCHAIN=stable
-  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+  cargo fetch --locked --target "$(rustc --print host-tuple)"
 }
 
 build() {
