@@ -1,12 +1,17 @@
-# Maintainer: David Runge <dvzrv@archlinux.org>
+# Maintainer: Electronic-Mango <78230210+Electronic-Mango@users.noreply.github.com>
 
-pkgname=xwayland-satellite
+_pkgname='xwayland-satellite'
+pkgname="${_pkgname}-cursor-scaling-fix"
 pkgver=0.8.2
 pkgrel=1
-pkgdesc="Xwayland outside your Wayland"
+pkgdesc="Xwayland outside your Wayland (with cursor scaling fix)"
 arch=(x86_64)
-url="https://github.com/Supreeeme/xwayland-satellite"
+url="https://github.com/Supreeeme/${_pkgname}"
 license=(MPL-2.0)
+provides=("${_pkgname}")
+conflicts=("${_pkgname}" "${_pkgname}-git")
+options=(strip !debug lto)
+
 depends=(
   glibc
   libgcc
@@ -15,33 +20,46 @@ depends=(
   xorg-xwayland
 )
 makedepends=(
+  git
   clang
   rust
 )
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha512sums=('a125fe92591c7c39c4ae05e5d7a5b737d4104419165b98e4d486c5e2208b30b95173f2793141ef897f23f22c87c15f80daf8dcc2dbb4327c2fdf3288d56acd80')
-b2sums=('3bd8880386f0b2f73d2587e9ad5803ded1e107be4f4b8fe75f17453a3e98624f9f34c15a2ef11a2bb8362809100b6d9ce4fd6e1d350af164b3cf954cae7653db')
+
+source=("git+${url}.git")
+sha512sums=(SKIP)
+b2sums=(SKIP)
+
+pkgver() {
+  cd ${_pkgname}
+  git describe --long --abbrev=7 | sed -e 's/^v//' -e 's/\([^-]*-g\)/r\1/' -e 's/-/./g'
+}
 
 prepare() {
-  cd $pkgname-$pkgver
-  sed 's|/usr/local|/usr|' -i resources/$pkgname.service
+  cd "${_pkgname}"
+  git config user.name "local"
+  git config user.email "<>"
+  git pull origin pull/423/head --no-ff --no-commit
+  sed 's|/usr/local|/usr|' -i "resources/${_pkgname}.service"
+  export CARGO_HOME="${srcdir}/.cargo"
   cargo fetch --locked --target "$(rustc --print host-tuple)"
 }
 
 build() {
-  cd $pkgname-$pkgver
+  cd "${_pkgname}"
+  export CARGO_HOME="${srcdir}/.cargo"
   cargo build --frozen --release --features systemd
 }
 
 check() {
-  cd $pkgname-$pkgver
+  cd "${_pkgname}"
   export XDG_RUNTIME_DIR="$(mktemp -d)"
+  export CARGO_HOME="${srcdir}/.cargo"
   cargo test --frozen
 }
 
 package() {
-  cd $pkgname-$pkgver
-  install -vDm 755 target/release/$pkgname -t "$pkgdir/usr/bin/"
-  install -vDm 644 resources/$pkgname.service -t "$pkgdir/usr/lib/systemd/user/"
-  install -vDm 644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgdir/"
+  cd "${_pkgname}"
+  install -vDm 755 "target/release/${_pkgname}" -t "${pkgdir}/usr/bin/"
+  install -vDm 644 "resources/${_pkgname}.service" -t "${pkgdir}/usr/lib/systemd/user/"
+  install -vDm 644 "LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgdir}/"
 }
