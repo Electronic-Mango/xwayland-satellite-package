@@ -47,6 +47,7 @@ prepare() {
 build() {
   cd "${_pkgname}"
   export CARGO_HOME="${srcdir}/.cargo"
+  export RUSTFLAGS="--remap-path-prefix=$srcdir=/"
   cargo build --frozen --release --features systemd
 }
 
