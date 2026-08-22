@@ -1,4 +1,4 @@
-pkgbase = xwayland-satellite
+pkgbase = xwayland-satellite-cursor-scaling-fix
 	pkgdesc = Xwayland outside your Wayland (with cursor scaling fix)
 	pkgver = 0.8.2
 	pkgrel = 1
@@ -13,14 +13,14 @@ pkgbase = xwayland-satellite
 	depends = libxcb
 	depends = xcb-util-cursor
 	depends = xorg-xwayland
-	source = git+https://github.com/Supreeeme/xwayland-satellite.git
-	sha512sums = SKIP
-	b2sums = SKIP
 	provides = xwayland-satellite
 	conflicts = xwayland-satellite
 	conflicts = xwayland-satellite-git
 	options = strip
 	options = !debug
 	options = lto
+	source = git+https://github.com/Supreeeme/xwayland-satellite.git
+	sha512sums = SKIP
+	b2sums = SKIP
 
 pkgname = xwayland-satellite-cursor-scaling-fix
