@@ -1,7 +1,7 @@
 # Maintainer: Electronic-Mango <78230210+Electronic-Mango@users.noreply.github.com>
 
 _pkgname='xwayland-satellite'
-pkgname="${_pkgname}-cursor-scaling-fix"
+pkgname="${_pkgname}-cursor-scaling-fix-local"
 pkgver=0.8.3
 pkgrel=1
 pkgdesc="Xwayland outside your Wayland (with cursor scaling fix)"
@@ -9,7 +9,7 @@ arch=(x86_64)
 url="https://github.com/Supreeeme/${_pkgname}"
 license=(MPL-2.0)
 provides=("${_pkgname}")
-conflicts=("${_pkgname}" "${_pkgname}-git")
+conflicts=("${_pkgname}" "${_pkgname}-git" "${_pkgname}-cursor-scaling-fix")
 options=(strip !debug lto)
 
 depends=(

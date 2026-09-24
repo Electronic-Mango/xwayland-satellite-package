@@ -1,4 +1,4 @@
-pkgbase = xwayland-satellite-cursor-scaling-fix
+pkgbase = xwayland-satellite-cursor-scaling-fix-local
 	pkgdesc = Xwayland outside your Wayland (with cursor scaling fix)
 	pkgver = 0.8.3
 	pkgrel = 1
@@ -16,6 +16,7 @@ pkgbase = xwayland-satellite-cursor-scaling-fix
 	provides = xwayland-satellite
 	conflicts = xwayland-satellite
 	conflicts = xwayland-satellite-git
+	conflicts = xwayland-satellite-cursor-scaling-fix
 	options = strip
 	options = !debug
 	options = lto
@@ -23,4 +24,4 @@ pkgbase = xwayland-satellite-cursor-scaling-fix
 	sha512sums = SKIP
 	b2sums = SKIP
 
-pkgname = xwayland-satellite-cursor-scaling-fix
+pkgname = xwayland-satellite-cursor-scaling-fix-local
