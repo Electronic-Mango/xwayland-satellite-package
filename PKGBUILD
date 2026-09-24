@@ -31,7 +31,7 @@ b2sums=(SKIP)
 
 pkgver() {
   cd ${_pkgname}
-  git describe --long --abbrev=7 | sed -e 's/^v//' -e 's/\([^-]*-g\)/r\1/' -e 's/-/./g'
+  git describe --tags --long --abbrev=7 | sed -e 's/^v//' -e 's/\([^-]*-g\)/r\1/' -e 's/-/./g'
 }
 
 prepare() {
